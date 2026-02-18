@@ -4,11 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel 12 Master Guide | Comandos & Referência</title>
+    <title>Laravel 12 Master Guide | Anderson Dev</title>
     <link rel="shortcut icon" href="https://laravel.com/img/favicon/favicon.ico">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
@@ -20,170 +25,296 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <a href="#" class="brand-logo">
-                    <i class="bi bi-box-seam-fill"></i> Laravel Guide
+                    <img src="https://laravel.com/img/logomark.min.svg" alt="Laravel" width="30">
+                    <span>Laravel<span class="text-primary">Guide</span></span>
                 </a>
+                <button class="btn-close-sidebar d-lg-none" onclick="toggleSidebar()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
             </div>
-            <nav class="sidebar-nav" id="sidebarNav">
-            </nav>
+
+            <div class="sidebar-content">
+                <div class="sidebar-label">Navegação</div>
+                <nav class="sidebar-nav" id="sidebarNav">
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <small>v1.2.0 &bull; Laravel 12</small>
+            </div>
         </aside>
 
         <main class="main-content">
+            <div class="backdrop-overlay" onclick="toggleSidebar()"></div>
 
             <header class="top-header">
-                <div class="d-flex align-items-center flex-grow-1">
+                <div class="header-left">
                     <button class="mobile-menu-btn" onclick="toggleSidebar()">
                         <i class="bi bi-list"></i>
                     </button>
-
                     <div class="search-wrapper">
                         <i class="bi bi-search search-icon"></i>
                         <input type="text" id="searchInput" class="search-input"
-                            placeholder="Buscar comando (ex: controller, migrate, npm)...">
+                            placeholder="Buscar comando (ex: controller, sail, auth)..." autocomplete="off">
+                        <span class="kbd-shortcut d-none d-md-block">/</span>
                     </div>
                 </div>
 
-                <div class="d-flex align-items-center ms-3">
-                    <div class="theme-toggle" id="themeToggle">
+                <div class="header-right">
+                    <a href="https://laravel.com/docs" target="_blank" class="btn-doc-link d-none d-sm-flex">
+                        Docs Oficial <i class="bi bi-box-arrow-up-right ms-2"></i>
+                    </a>
+                    <div class="theme-toggle" id="themeToggle" title="Alternar Tema">
                         <i class="bi bi-moon-stars"></i>
                     </div>
                 </div>
             </header>
 
-            <div class="container-fluid mb-5 p-0">
-                <div class="row g-4">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="info-card shadow-sm">
-                            <h3><i class="bi bi-rocket-takeoff me-2"></i>Início Rápido</h3>
-                            <ol>
-                                <li><code>composer create-project laravel/laravel app</code></li>
-                                <li><code>cd app</code></li>
-                                <li><code>composer install</code> & <code>npm install</code></li>
-                                <li>Configurar <code>.env</code></li>
-                                <li><code>php artisan migrate</code></li>
-                                <li><code>npm run dev</code> (Vite)</li>
-                                <li><code>php artisan serve</code></li>
-                            </ol>
+            <div class="container-fluid content-body">
+
+                <div class="row g-4 mb-5">
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="feature-card h-100">
+                            <div class="card-icon bg-red-soft">
+                                <i class="bi bi-rocket-takeoff-fill text-primary"></i>
+                            </div>
+                            <h3 class="card-title">Setup Inicial</h3>
+                            <ul class="step-list">
+                                <li>
+                                    <span class="step-num">1</span>
+                                    <code>composer create-project laravel/laravel app</code>
+                                </li>
+                                <li>
+                                    <span class="step-num">2</span>
+                                    <code>cd app</code>
+                                </li>
+                                <li>
+                                    <span class="step-num">3</span>
+                                    <span>Configurar <code>.env</code> (DB, App URL)</span>
+                                </li>
+                                <li>
+                                    <span class="step-num">4</span>
+                                    <code>php artisan migrate</code>
+                                </li>
+                                <li>
+                                    <span class="step-num">5</span>
+                                    <code>npm run dev</code> <small class="text-muted">+ artisan serve</small>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div class="col-lg-8 col-md-6">
-                        <div class="info-card shadow-sm">
-                            <h3><i class="bi bi-magic me-2"></i>Guia: Criar Helper Global</h3>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="helper-step">
-                                        <strong>1. Criar Arquivo</strong><br>
-                                        Crie <code>app/Helpers/functions.php</code>
+                    <div class="col-xl-8 col-lg-6">
+                        <div class="feature-card h-100">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="card-icon bg-blue-soft">
+                                        <i class="bi bi-code-slash text-info"></i>
                                     </div>
-                                    <div class="helper-step">
-                                        <strong>2. Adicionar Função</strong><br>
-                                        <small>Exemplo:</small><br>
-                                        <code>if (!function_exists('format_currency')) { ... }</code>
+                                    <h3 class="card-title mb-0">Receita: Helper Global</h3>
+                                </div>
+                                <span class="badge bg-light text-dark border">Boas Práticas</span>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="guide-step">
+                                        <small class="text-uppercase text-muted fw-bold"
+                                            style="font-size: 0.7rem;">Passo 1</small>
+                                        <div class="mb-1">Criar arquivo: <code>app/Helpers/custom.php</code></div>
+                                        <pre class="code-snippet"><code>if (!function_exists('money_br')) {
+    function money_br($value) {
+        return 'R$ ' . number_format($value, 2, ',', '.');
+    }
+}</code></pre>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="helper-step">
-                                        <strong>3. Registrar no composer.json</strong><br>
-                                        No array "autoload":
-                                        <pre class="mb-0 mt-1"
-                                            style="background: var(--code-bg); color: var(--code-text); padding: 5px; border-radius: 4px; font-size: 0.8em;">"files": ["app/Helpers/functions.php"]</pre>
-                                    </div>
-                                    <div class="helper-step">
-                                        <strong>4. Atualizar</strong><br>
-                                        Execute: <code>composer dump-autoload</code>
+                                    <div class="guide-step">
+                                        <small class="text-uppercase text-muted fw-bold"
+                                            style="font-size: 0.7rem;">Passo 2</small>
+                                        <div class="mb-1">Editar <code>composer.json</code>:</div>
+                                        <pre class="code-snippet"><code>"autoload": {
+    "psr-4": { ... },
+    "files": ["app/Helpers/custom.php"]
+}</code></pre>
+                                        <div class="mt-2 text-end">
+                                            <small class="text-muted">Finalizar:</small>
+                                            <code>composer dump-autoload</code>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <hr class="border-secondary opacity-25 my-5">
-
-            <div id="commands-container">
-            </div>
-
-            <footer class="mt-5 py-4 text-center text-muted border-top border-secondary border-opacity-25">
-                <p class="mb-0 small">Guia Atualizado para Laravel 12, PHP 8.2+ e Vite.</p>
-            </footer>
-
-        </main>
-    </div>
-
-    <div class="toast-container">
-        <div id="copyToast" class="toast align-items-center text-white bg-success border-0" role="alert"
-            aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    <i class="bi bi-check-circle-fill me-2"></i> Comando copiado!
+                <div class="divider-text">
+                    <span>Referência de Comandos</span>
                 </div>
+
+                <div id="commands-container"></div>
+
+                <footer class="app-footer">
+                    <p>Desenvolvido com <i class="bi bi-heart-fill text-danger mx-1"></i> para Laravel 12 & PHP 8.2+</p>
+                </footer>
             </div>
-        </div>
+        </main>
+
+        <button id="backToTop" class="btn-back-top" onclick="scrollToTop()">
+            <i class="bi bi-arrow-up"></i>
+        </button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-    // === DADOS COMPLETOS ===
-    // Organizados por categoria, com ícone e comandos atualizados
+    /* === DADOS DOS COMANDOS (EXPANDIDO) === */
     const commandData = [{
             category: "Ciclo de Vida & Instalação",
             icon: "bi-box-seam",
             id: "lifecycle",
             commands: [{
-                    cmd: "composer create-project laravel/laravel nome-projeto",
-                    desc: "Cria novo projeto Laravel."
+                    cmd: "composer create-project laravel/laravel .",
+                    desc: "Instala Laravel no diretório atual (vazio)."
                 },
                 {
-                    cmd: "laravel new nome-projeto",
-                    desc: "Cria projeto via instalador global."
+                    cmd: "laravel new app --git --pest",
+                    desc: "Instalador global com Git e Pest já configurados."
                 },
                 {
                     cmd: "php artisan serve",
-                    desc: "Inicia servidor local (http://localhost:8000)."
+                    desc: "Inicia servidor de desenvolvimento."
                 },
                 {
-                    cmd: "php artisan down",
-                    desc: "Coloca site em modo manutenção (503)."
+                    cmd: "php artisan down --secret='123'",
+                    desc: "Modo manutenção com bypass via URL/123."
                 },
                 {
                     cmd: "php artisan up",
-                    desc: "Remove modo de manutenção."
+                    desc: "Coloca a aplicação online novamente."
                 },
                 {
                     cmd: "php artisan about",
-                    desc: "Mostra detalhes do ambiente (Versão, Cache, Drivers)."
+                    desc: "Overview completa (Drivers, Versões, Cache)."
                 }
             ]
         },
         {
-            category: "Composer (Dependências)",
-            icon: "bi-cloud-download",
-            id: "composer",
+            category: "Laravel Sail (Docker)",
+            icon: "bi-docker",
+            id: "sail",
             commands: [{
-                    cmd: "composer install",
-                    desc: "Instala dependências listadas no composer.lock."
+                    cmd: "./vendor/bin/sail up -d",
+                    desc: "Sobe os containers Docker em background."
                 },
                 {
-                    cmd: "composer update",
-                    desc: "Atualiza dependências para versões mais recentes permitidas."
+                    cmd: "./vendor/bin/sail stop",
+                    desc: "Para os containers."
                 },
                 {
-                    cmd: "composer require nome/pacote",
-                    desc: "Adiciona um novo pacote ao projeto."
+                    cmd: "./vendor/bin/sail artisan migrate",
+                    desc: "Roda comando artisan DENTRO do container."
                 },
                 {
-                    cmd: "composer remove nome/pacote",
-                    desc: "Remove um pacote instalado."
+                    cmd: "./vendor/bin/sail composer require pacote",
+                    desc: "Composer via container."
                 },
                 {
-                    cmd: "composer dump-autoload",
-                    desc: "Regera o mapa de classes (útil ao criar Helpers ou mudar pastas)."
+                    cmd: "./vendor/bin/sail shell",
+                    desc: "Acessa o terminal do container da aplicação."
                 },
                 {
-                    cmd: "composer show",
-                    desc: "Lista todos os pacotes instalados."
+                    cmd: "php artisan sail:install",
+                    desc: "Instala/Reconfigura o docker-compose.yml."
+                }
+            ]
+        },
+        {
+            category: "Geradores (Make)",
+            icon: "bi-magic",
+            id: "make",
+            commands: [{
+                    cmd: "php artisan make:model Produto -mfc",
+                    desc: "Model + Migration + Factory + Controller."
+                },
+                {
+                    cmd: "php artisan make:controller Api/UserController --api",
+                    desc: "Controller API (sem create/edit)."
+                },
+                {
+                    cmd: "php artisan make:request StoreUserRequest",
+                    desc: "Form Request para validação."
+                },
+                {
+                    cmd: "php artisan make:resource UserResource",
+                    desc: "API Resource (JSON Transformer)."
+                },
+                {
+                    cmd: "php artisan make:component Alert --view",
+                    desc: "Componente Blade (apenas view)."
+                },
+                {
+                    cmd: "php artisan make:job ProcessPodcast",
+                    desc: "Job para processamento em fila."
+                },
+                {
+                    cmd: "php artisan make:mail WelcomeEmail",
+                    desc: "Classe de envio de e-mail (Mailable)."
+                },
+                {
+                    cmd: "php artisan make:notification InvoicePaid",
+                    desc: "Notificação (Email/Database/Slack)."
+                },
+                {
+                    cmd: "php artisan make:enum UserStatus",
+                    desc: "PHP Enum (Laravel 11+)."
+                },
+                {
+                    cmd: "php artisan make:trait Searchable",
+                    desc: "Cria uma Trait."
+                },
+                {
+                    cmd: "php artisan make:scope ActiveScope",
+                    desc: "Cria um Query Scope reutilizável."
+                }
+            ]
+        },
+        {
+            category: "Banco de Dados & Migrations",
+            icon: "bi-database-fill-gear",
+            id: "db",
+            commands: [{
+                    cmd: "php artisan migrate",
+                    desc: "Executa migrações pendentes."
+                },
+                {
+                    cmd: "php artisan migrate:fresh --seed",
+                    desc: "Destrói DB, recria tabelas e roda seeds."
+                },
+                {
+                    cmd: "php artisan migrate:status",
+                    desc: "Verifica quais migrações já rodaram."
+                },
+                {
+                    cmd: "php artisan db:seed --class=UserSeeder",
+                    desc: "Roda um Seeder específico."
+                },
+                {
+                    cmd: "php artisan db:show",
+                    desc: "Painel visual do banco (Tabelas e tamanhos)."
+                },
+                {
+                    cmd: "php artisan db:monitor",
+                    desc: "Verifica conexões ativas no banco."
+                },
+                {
+                    cmd: "php artisan schema:dump",
+                    desc: "Exporta schema atual para arquivo SQL (Performance)."
+                },
+                {
+                    cmd: "php artisan model:prune",
+                    desc: "Remove modelos antigos (Soft Deletes/Prunable)."
                 }
             ]
         },
@@ -192,260 +323,154 @@
             icon: "bi-filetype-js",
             id: "npm",
             commands: [{
-                    cmd: "npm install",
-                    desc: "Instala dependências Node (node_modules)."
-                },
-                {
-                    cmd: "npm run dev",
-                    desc: "Inicia servidor Vite para desenvolvimento (Hot Reload)."
+                    cmd: "npm install && npm run dev",
+                    desc: "Instala libs e roda servidor Vite."
                 },
                 {
                     cmd: "npm run build",
-                    desc: "Compila assets para produção (pasta public/build)."
-                },
-                {
-                    cmd: "npm update",
-                    desc: "Atualiza pacotes NPM."
-                }
-            ]
-        },
-        {
-            category: "Artisan Make (Geradores)",
-            icon: "bi-code-square",
-            id: "make",
-            commands: [{
-                    cmd: "php artisan make:controller NomeController",
-                    desc: "Cria Controller simples."
-                },
-                {
-                    cmd: "php artisan make:controller NomeController --resource",
-                    desc: "Cria Controller com métodos CRUD."
-                },
-                {
-                    cmd: "php artisan make:model Nome -mfc",
-                    desc: "Cria Model + Migration + Factory + Controller."
-                },
-                {
-                    cmd: "php artisan make:migration create_tabela_table",
-                    desc: "Cria arquivo de migração."
-                },
-                {
-                    cmd: "php artisan make:seeder NomeSeeder",
-                    desc: "Cria classe para popular banco."
-                },
-                {
-                    cmd: "php artisan make:request NomeRequest",
-                    desc: "Cria Form Request (validação)."
-                },
-                {
-                    cmd: "php artisan make:resource NomeResource",
-                    desc: "Cria API Resource (transformação JSON)."
-                },
-                {
-                    cmd: "php artisan make:component NomeComponente",
-                    desc: "Cria componente Blade."
-                },
-                {
-                    cmd: "php artisan make:job NomeJob",
-                    desc: "Cria Job para filas."
-                },
-                {
-                    cmd: "php artisan make:test NomeTeste",
-                    desc: "Cria teste (Feature)."
-                },
-                {
-                    cmd: "php artisan make:enum NomeEnum",
-                    desc: "Cria Enum PHP (Laravel 11+)."
-                },
-                {
-                    cmd: "php artisan make:class NomeClasse",
-                    desc: "Cria classe genérica (Laravel 11+)."
-                },
-                {
-                    cmd: "php artisan make:interface NomeInterface",
-                    desc: "Cria Interface (Laravel 11+)."
-                },
-                {
-                    cmd: "php artisan make:observer NomeObserver",
-                    desc: "Cria Observer para Models."
-                }
-            ]
-        },
-        {
-            category: "Banco de Dados",
-            icon: "bi-database",
-            id: "db",
-            commands: [{
-                    cmd: "php artisan migrate",
-                    desc: "Executa migrações pendentes."
-                },
-                {
-                    cmd: "php artisan migrate:fresh --seed",
-                    desc: "Apaga tudo, recria tabelas e roda seeders."
-                },
-                {
-                    cmd: "php artisan migrate:rollback",
-                    desc: "Reverte o último lote de migrações."
-                },
-                {
-                    cmd: "php artisan migrate:status",
-                    desc: "Mostra quais migrações já rodaram."
-                },
-                {
-                    cmd: "php artisan db:seed",
-                    desc: "Roda os seeders (DatabaseSeeder)."
-                },
-                {
-                    cmd: "php artisan db:show",
-                    desc: "Mostra visão geral do banco de dados (Tamanho, conexões)."
-                },
-                {
-                    cmd: "php artisan db:table nome_tabela",
-                    desc: "Mostra detalhes e registros de uma tabela específica."
-                },
-                {
-                    cmd: "php artisan model:show NomeModel",
-                    desc: "Inspeciona atributos e relações de um Model."
-                },
-                {
-                    cmd: "php artisan db:wipe",
-                    desc: "Remove todas as tabelas (sem rodar rollback)."
-                }
-            ]
-        },
-        {
-            category: "Cache & Otimização",
-            icon: "bi-speedometer2",
-            id: "optimize",
-            commands: [{
-                    cmd: "php artisan optimize",
-                    desc: "Cache de config, rotas e arquivos (Produção)."
-                },
-                {
-                    cmd: "php artisan optimize:clear",
-                    desc: "Limpa TODOS os caches (Config, Route, View, Event)."
-                },
-                {
-                    cmd: "php artisan config:clear",
-                    desc: "Limpa apenas cache de configuração (útil ao mexer no .env)."
-                },
-                {
-                    cmd: "php artisan route:list",
-                    desc: "Lista todas as rotas registradas."
-                },
-                {
-                    cmd: "php artisan route:clear",
-                    desc: "Limpa cache de rotas."
-                },
-                {
-                    cmd: "php artisan view:clear",
-                    desc: "Limpa views Blade compiladas."
-                }
-            ]
-        },
-        {
-            category: "Configuração & Instalação (Laravel 11/12)",
-            icon: "bi-gear-wide-connected",
-            id: "install",
-            commands: [{
-                    cmd: "php artisan install:api",
-                    desc: "Instala e configura Laravel Sanctum para API."
-                },
-                {
-                    cmd: "php artisan install:broadcasting",
-                    desc: "Instala Laravel Reverb ou Pusher para sockets."
-                },
-                {
-                    cmd: "php artisan key:generate",
-                    desc: "Gera nova APP_KEY no .env."
+                    desc: "Compilação otimizada para produção."
                 },
                 {
                     cmd: "php artisan storage:link",
-                    desc: "Cria atalho simbólico public/storage."
+                    desc: "Link simbólico para arquivos públicos."
+                }
+            ]
+        },
+        {
+            category: "Cache & Performance",
+            icon: "bi-lightning-charge-fill",
+            id: "optimize",
+            commands: [{
+                    cmd: "php artisan optimize",
+                    desc: "Cacheia Configs, Rotas e Arquivos (PROD)."
                 },
                 {
-                    cmd: "php artisan vendor:publish",
-                    desc: "Publica arquivos de configuração de pacotes."
+                    cmd: "php artisan optimize:clear",
+                    desc: "Limpa TODOS os caches (Dev)."
+                },
+                {
+                    cmd: "php artisan route:list --except-vendor",
+                    desc: "Lista rotas da aplicação (oculta libs)."
+                },
+                {
+                    cmd: "php artisan config:clear",
+                    desc: "Limpa cache de configuração."
+                },
+                {
+                    cmd: "php artisan view:cache",
+                    desc: "Pré-compila todas as views Blade."
                 }
             ]
         },
         {
             category: "Filas (Queues)",
-            icon: "bi-layers",
+            icon: "bi-layers-half",
             id: "queue",
             commands: [{
-                    cmd: "php artisan queue:work",
-                    desc: "Inicia worker para processar fila."
+                    cmd: "php artisan queue:work --tries=3",
+                    desc: "Processa fila com máx de 3 tentativas."
                 },
                 {
                     cmd: "php artisan queue:listen",
-                    desc: "Ouve filas (reinicia script a cada job - dev)."
+                    desc: "Ouve fila (recarrega código a cada job - lento)."
                 },
                 {
                     cmd: "php artisan queue:retry all",
-                    desc: "Tenta reprocessar jobs falhados."
+                    desc: "Tenta reprocessar todos jobs falhados."
+                },
+                {
+                    cmd: "php artisan queue:failed",
+                    desc: "Lista jobs que deram erro."
                 },
                 {
                     cmd: "php artisan queue:clear",
-                    desc: "Limpa todos os jobs da fila."
-                },
-                {
-                    cmd: "php artisan schedule:work",
-                    desc: "Executa agendador de tarefas localmente."
+                    desc: "Limpa a fila (Cuidado)."
                 }
             ]
         },
         {
-            category: "Testes & Debug",
-            icon: "bi-bug",
-            id: "debug",
+            category: "Segurança & Auth",
+            icon: "bi-shield-lock-fill",
+            id: "security",
+            commands: [{
+                    cmd: "composer require laravel/breeze --dev",
+                    desc: "Instala pacote de Auth leve."
+                },
+                {
+                    cmd: "php artisan install:api",
+                    desc: "Configura Sanctum para API Tokens."
+                },
+                {
+                    cmd: "php artisan key:generate",
+                    desc: "Rotaciona a chave de criptografia (APP_KEY)."
+                },
+                {
+                    cmd: "php artisan auth:clear-resets",
+                    desc: "Limpa tokens de reset de senha expirados."
+                }
+            ]
+        },
+        {
+            category: "Utilitários & Debug",
+            icon: "bi-bug-fill",
+            id: "utils",
             commands: [{
                     cmd: "php artisan tinker",
-                    desc: "Console interativo PHP (REPL)."
+                    desc: "Shell interativo PHP (REPL)."
                 },
                 {
-                    cmd: "php artisan test",
-                    desc: "Executa suite de testes (Pest ou PHPUnit)."
+                    cmd: "php artisan docs session",
+                    desc: "Abre a documentação sobre Session (L11+)."
                 },
                 {
-                    cmd: "php artisan test --filter=NomeMetodo",
-                    desc: "Executa apenas um teste específico."
+                    cmd: "php artisan inspect:views",
+                    desc: "Analisa views em busca de erros (L11+)."
                 },
                 {
-                    cmd: "php artisan env",
-                    desc: "Exibe o ambiente atual (local/production)."
+                    cmd: "php artisan stub:publish",
+                    desc: "Publica stubs para personalizar 'artisan make'."
+                },
+                {
+                    cmd: "php artisan lang:publish",
+                    desc: "Publica arquivos de tradução."
                 }
             ]
         }
     ];
 
-    // === RENDERIZAÇÃO ===
+    /* === LÓGICA DE RENDERIZAÇÃO === */
     const commandsContainer = document.getElementById('commands-container');
     const sidebarNav = document.getElementById('sidebarNav');
     const searchInput = document.getElementById('searchInput');
 
-    function renderAll() {
-        // Limpar
+    function renderApp() {
         commandsContainer.innerHTML = '';
         sidebarNav.innerHTML = '';
 
         commandData.forEach(section => {
-            // 1. Renderizar link na Sidebar
-            const navItem = document.createElement('a');
-            navItem.href = `#${section.id}`;
-            navItem.className = 'nav-link';
-            navItem.innerHTML = `<i class="bi ${section.icon}"></i> ${section.category}`;
-            sidebarNav.appendChild(navItem);
+            // 1. Sidebar Link
+            const link = document.createElement('a');
+            link.href = `#${section.id}`;
+            link.className = 'nav-link';
+            link.innerHTML = `<i class="bi ${section.icon}"></i> ${section.category}`;
+            // Fecha sidebar no mobile ao clicar
+            link.onclick = () => {
+                if (window.innerWidth < 992) toggleSidebar();
+            };
+            sidebarNav.appendChild(link);
 
-            // 2. Renderizar Seção Principal
-            const sectionDiv = document.createElement('div');
-            sectionDiv.className = 'category-section';
-            sectionDiv.id = section.id;
+            // 2. Seção Principal
+            const sectionEl = document.createElement('div');
+            sectionEl.className = 'category-section';
+            sectionEl.id = section.id;
 
-            const title = document.createElement('h2');
-            title.className = 'category-title';
-            title.innerHTML = `<i class="bi ${section.icon}"></i> ${section.category}`;
-            sectionDiv.appendChild(title);
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `
+                <div class="icon-box"><i class="bi ${section.icon}"></i></div>
+                <h2>${section.category}</h2>
+            `;
+            sectionEl.appendChild(header);
 
             const grid = document.createElement('div');
             grid.className = 'commands-grid';
@@ -453,127 +478,140 @@
             section.commands.forEach(c => {
                 const card = document.createElement('div');
                 card.className = 'command-card';
+                // Highlight sintaxe básica
+                const cmdHtml = c.cmd.replace(/(--[\w-]+)/g, '<span class="opt">$1</span>')
+                    .replace(/(php artisan)/g, '<span class="core">$1</span>');
+
                 card.innerHTML = `
+                    <div class="card-content">
                         <div class="command-desc">${c.desc}</div>
-                        <div class="code-container">
-                            <span class="code-text">${c.cmd}</span>
-                            <button class="btn-copy-icon" onclick="copyText('${c.cmd}')" title="Copiar">
-                                <i class="bi bi-clipboard"></i>
-                            </button>
+                        <div class="code-wrapper">
+                            <code class="code-line">${cmdHtml}</code>
                         </div>
-                    `;
+                    </div>
+                    <button class="btn-copy" onclick="copyToClipboard(this, '${c.cmd}')" aria-label="Copiar">
+                        <i class="bi bi-clipboard"></i>
+                    </button>
+                `;
                 grid.appendChild(card);
             });
 
-            sectionDiv.appendChild(grid);
-            commandsContainer.appendChild(sectionDiv);
+            sectionEl.appendChild(grid);
+            commandsContainer.appendChild(sectionEl);
         });
 
-        // Scroll Spy Simplificado (Highlight sidebar)
-        window.addEventListener('scroll', onScrollSpy);
+        setupScrollSpy();
     }
 
-    // === FUNCIONALIDADES ===
+    /* === FUNCIONALIDADES === */
 
-    // 1. Copiar com Toast
-    function copyText(text) {
+    // 1. Copiar Inteligente
+    function copyToClipboard(btn, text) {
         navigator.clipboard.writeText(text).then(() => {
-            const toastEl = document.getElementById('copyToast');
-            const toast = new bootstrap.Toast(toastEl);
-            toast.show();
+            const originalIcon = btn.innerHTML;
+            btn.classList.add('copied');
+            btn.innerHTML = `<i class="bi bi-check-lg"></i>`;
+
+            setTimeout(() => {
+                btn.classList.remove('copied');
+                btn.innerHTML = `<i class="bi bi-clipboard"></i>`;
+            }, 2000);
         });
     }
 
-    // 2. Busca (Filtra sidebar E cards)
+    // 2. Busca e Filtro
     searchInput.addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
-        const sections = document.querySelectorAll('.category-section');
-        const links = document.querySelectorAll('.sidebar-nav .nav-link');
 
-        sections.forEach(section => {
-            const cards = section.querySelectorAll('.command-card');
+        document.querySelectorAll('.category-section').forEach(section => {
             let hasVisible = false;
-
-            cards.forEach(card => {
-                const txt = card.textContent.toLowerCase();
-                if (txt.includes(term)) {
-                    card.style.display = 'flex';
-                    hasVisible = true;
-                } else {
-                    card.style.display = 'none';
-                }
+            section.querySelectorAll('.command-card').forEach(card => {
+                const text = card.textContent.toLowerCase();
+                const match = text.includes(term);
+                card.style.display = match ? 'flex' : 'none';
+                if (match) hasVisible = true;
             });
-
-            // Esconde a seção se não tiver cards visíveis
             section.style.display = hasVisible ? 'block' : 'none';
 
-            // Esconde link da sidebar
+            // Atualiza sidebar
             const link = document.querySelector(`a[href="#${section.id}"]`);
             if (link) link.style.display = hasVisible ? 'flex' : 'none';
         });
     });
 
-    // 3. Dark Mode
+    // Atalho de teclado "/" para busca
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== searchInput) {
+            e.preventDefault();
+            searchInput.focus();
+        }
+    });
+
+    // 3. Tema (Dark/Light)
     const themeToggle = document.getElementById('themeToggle');
     const html = document.documentElement;
+    const icon = themeToggle.querySelector('i');
 
-    // Carregar tema salvo
-    if (localStorage.getItem('theme') === 'dark') {
-        html.setAttribute('data-theme', 'dark');
-        themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+    function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        icon.className = theme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars';
     }
+
+    // Init Theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
 
     themeToggle.addEventListener('click', () => {
-        if (html.getAttribute('data-theme') === 'light') {
-            html.setAttribute('data-theme', 'dark');
-            themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
-            localStorage.setItem('theme', 'dark');
-        } else {
-            html.setAttribute('data-theme', 'light');
-            themeToggle.innerHTML = '<i class="bi bi-moon-stars"></i>';
-            localStorage.setItem('theme', 'light');
-        }
+        const current = html.getAttribute('data-theme');
+        setTheme(current === 'light' ? 'dark' : 'light');
     });
 
-    // 4. Mobile Sidebar
-    const sidebar = document.getElementById('sidebar');
-
+    // 4. Sidebar Mobile
     function toggleSidebar() {
-        sidebar.classList.toggle('open');
+        document.getElementById('sidebar').classList.toggle('open');
+        document.querySelector('.backdrop-overlay').classList.toggle('show');
     }
 
-    // Fechar sidebar ao clicar fora (mobile)
-    document.addEventListener('click', (e) => {
-        if (window.innerWidth < 992) {
-            if (!sidebar.contains(e.target) && !e.target.closest('.mobile-menu-btn')) {
-                sidebar.classList.remove('open');
-            }
-        }
-    });
-
-    // 5. Scroll Spy (Ativar link da sidebar ao rolar)
-    function onScrollSpy() {
+    // 5. Scroll Spy & Back to Top
+    function setupScrollSpy() {
         const sections = document.querySelectorAll('.category-section');
         const navLinks = document.querySelectorAll('.nav-link');
+        const backToTopBtn = document.getElementById('backToTop');
 
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (scrollY >= sectionTop - 150) {
-                current = section.getAttribute('id');
-            }
-        });
+        window.addEventListener('scroll', () => {
+            let current = '';
 
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active');
-            }
+            // Back to top visibility
+            if (window.scrollY > 300) backToTopBtn.classList.add('show');
+            else backToTopBtn.classList.remove('show');
+
+            // Spy logic
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
         });
     }
 
-    // Init
-    document.addEventListener('DOMContentLoaded', renderAll);
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', renderApp);
     </script>
 </body>
 
